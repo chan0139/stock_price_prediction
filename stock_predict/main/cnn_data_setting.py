@@ -50,5 +50,9 @@ def cnn_today_predict(last_day):
     image = np.array([cv2.imread('./picture/picture.png')])
 
     prediction = cnn_model.predict(image)
+    up = prediction[0][0]
+    down = prediction[0][1]
 
-    return prediction
+
+
+    return up,down

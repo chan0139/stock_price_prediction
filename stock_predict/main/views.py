@@ -9,8 +9,8 @@ import re
 
 from django.conf import settings
 from .lstm_news import predict
-from .cnn_data_setting import draw_picture_today
-
+from .cnn_data_setting import cnn_today_predict
+from .chart_data_setting import chart_today_predict
 # test
 # from .models import News
 # from .news_crawling import crawling
@@ -34,10 +34,16 @@ def result(request):
         result = predict()
 
     if selected_model == 'model2':
-        result = "CNN"
+        target_day = get_last_day()
+
+        up, down = cnn_today_predict(target_day)
+        result = compare(up,down)
 
     if selected_model == 'model3':
-        result = "LSTM"
+        target_day = get_last_day()
+
+        up, down = chart_today_predict(target_day)
+        result = compare(up,down)
 
     if selected_model == 'model4':
         result = "CHART"
@@ -79,8 +85,33 @@ def test(request):
     else:
         last_day = str(date.today())
 
-    prediction = draw_picture_today(last_day)
-    
+    up, down = cnn_today_predict(last_day)
+    if up > down:
+        result = round(up*100,1)
+    else:
+        result = round(down*100,1)
+    print(result)
 
 
     return HttpResponse("asddsdasf")
+
+def get_last_day():
+    time = pd.datetime.now()
+    yesterday = date.today() - timedelta(1)
+
+
+    if (time.hour >= 0) & (time.hour < 15): # finance data reader상, 장중의 데이터로 예측을 해버리므로 잘못된 예측 가능... -> 3시부터 업뎃되도록 처리
+        last_day = str(yesterday)
+
+    else:
+        last_day = str(date.today())
+    target_day = last_day
+    return target_day
+
+def compare(up, down):
+    if up > down:
+        result = round(up*100,1)
+    else:
+        result = round(down*100,1)-50
+
+    return result

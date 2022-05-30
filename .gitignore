@@ -6,3 +6,7 @@ db.sqlite3
 /static
 /media/images
 .DS_Store
+*.pb
+Cat_model
+*.h5
+bert_ckpt
