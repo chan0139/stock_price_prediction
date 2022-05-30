@@ -1,0 +1,13 @@
+<form action="{% url 'test' %}" method="post">
+  {% csrf_token %}
+      <p style=" float:left; margin-left:50em;"><input name="start" type="date" value="2022-05-20"></p>
+      <p style=" float:right; margin-right:50em;"><input name="end" type="date" value="2022-05-31"></p>
+
+      <div style="margin: auto; width: 85px; margin-top=2em;">
+        <button type="submit" class="btn">Testing!</button>
+      </div>
+</form>
+
+<p>{{start}}</p>
+
+<p>{{end}}</p>

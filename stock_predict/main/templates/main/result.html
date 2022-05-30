@@ -25,8 +25,6 @@
   <link rel="preload" as="style" href="/static/main/assets/mobirise/css/mbr-additional.css"><link rel="stylesheet" href="/static/main/assets/mobirise/css/mbr-additional.css" type="text/css">
 
 
-
-
 </head>
 
 
@@ -67,13 +65,13 @@
 
 
 <h2 style="text-align: center;"></h2>
-<h2 style="text-align: center; margin-top:3em">{{time}}</h2>
+<h2 style="text-align: center; margin-top:5em">Tomorrow stock prediction</h2>
 
 
 <form action="{% url 'result' %}" method="post">
   {% csrf_token %}
-  <p style="text-align: center;">Please select your preferred model</p>
-  <div style="margin: auto; width: 315px; margin-bottom:1em;">
+  <h2 style="text-align: center;">-> Please select your preferred model</h2>
+  <div style="margin: auto; width: 300px; margin-bottom:2em; margin-top:2em;">
     <input type="radio" id="modelChoice1"
      name="contact" value="model1">
     <label for="contactChoice1">LSTM_NEWS</label>
@@ -113,8 +111,8 @@
 
 <form action="{% url 'result' %}" method="post">
   {% csrf_token %}
-  <p style="text-align: center;">( 국내 / 해외 )</p>
-  <div style="margin: auto; width: 105px; margin-bottom:1em;">
+  <p style="text-align: center; margin-top:1em;">( 국내 / 해외 )</p>
+  <div style="margin: auto; width: 105px; margin-bottom:2.5em;">
     <input type="radio" id="countryChoice1"
      name="country" value="country1">
     <label for="contactChoice1">국내</label>
@@ -124,7 +122,20 @@
     <label for="contactChoice2">해외</label>
 
   </div>
-  <div style="margin: auto; width: 87px;">
+  <div style="margin: auto; width: 85px;">
     <button type="submit" class="btn">종목 선택</button>
   </div>
 </form>
+
+<h2 style="text-align: center; margin-top:1em;"> Voting model test </h2>
+<form action="{% url 'result' %}" method="post">
+  {% csrf_token %}
+      <p style=" float:left; margin-left:50em;"><input name="start" type="date" value="2022-05-20"></p>
+      <p style=" float:right; margin-right:50em;"><input name="end" type="date" value="2022-05-31"></p>
+
+      <div style="margin: auto; width: 85px; margin-top=2em;">
+        <button type="submit" class="btn">Testing!</button>
+      </div>
+</form>
+
+<h2 style="text-align: center;">{{stack}}</h2>
