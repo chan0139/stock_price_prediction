@@ -73,22 +73,22 @@
 <form action="{% url 'result' %}" method="post">
   {% csrf_token %}
   <p style="text-align: center;">Please select your preferred model</p>
-  <div style="margin: auto; width: 295px; margin-bottom:1em;">
+  <div style="margin: auto; width: 315px; margin-bottom:1em;">
     <input type="radio" id="modelChoice1"
      name="contact" value="model1">
-    <label for="contactChoice1">model1</label>
+    <label for="contactChoice1">LSTM_NEWS</label>
 
     <input type="radio" id="modelChoice2"
      name="contact" value="model2">
-    <label for="contactChoice2">model2</label>
+    <label for="contactChoice2">CNN</label>
 
     <input type="radio" id="modelChoice3"
      name="contact" value="model3">
-    <label for="contactChoice3">model3</label>
+    <label for="contactChoice3">CHART</label>
 
     <input type="radio" id="modelChoice4"
      name="contact" value="model4">
-    <label for="contactChoice4">model4</label>
+    <label for="contactChoice4">LSTM</label>
   </div>
   <div style="margin: auto; width: 100px;">
     <button type="submit" class='btn'>select model</button>

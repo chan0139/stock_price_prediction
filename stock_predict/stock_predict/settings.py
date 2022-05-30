@@ -14,6 +14,7 @@ from pathlib import Path
 from . import kobert_load
 from . import lstm_news_load
 from . import cnn_cat_load
+from . import lstm_load
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -131,6 +132,7 @@ MODEL_KOBERT = kobert_load.create_kobert()
 MY_TOKENIZER = kobert_load.load_bert_tokenizer()
 LSTM_MODEL = lstm_news_load.lstm_load()
 CNN_MODEL, CAT_MODEL = cnn_cat_load.cnn_cat_load()
+LSTM_MODEL_2 = lstm_load.lstm_load()
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
