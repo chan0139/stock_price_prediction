@@ -37,7 +37,7 @@
         <div class="container">
             <div class="navbar-brand">
 
-                <span class="navbar-caption-wrap"><a class="navbar-caption text-black display-7" href="https://mobiri.se">Mobirise</a></span>
+                <span class="navbar-caption-wrap"><a class="navbar-caption text-black display-7" href="http://127.0.0.1:8000/" style="margin-bottom:1.5em">Ants together strong</a></span>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <div class="hamburger">
@@ -101,7 +101,8 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8 mx-auto mbr-form" data-form-type="formoid">
-                <form action="https://mobirise.eu/" method="POST" class="mbr-form form-with-styler" data-form-title="Form Name"><input type="hidden" name="email" data-form-email="true" value="Gb3CkQt1CZrzDNRAWWllvlOk8H9D5TbfFtIJBN7BsTv/9Hk8pcXuh2g5tNuUkOheEBI2Z0HKDCscl83b23ky2uWXHhP3lRKP3v0UsCELqD1EX0Qc+tMdNvnJyV31H+M2">
+
+
                     <div class="row">
                         <div hidden="hidden" data-form-alert="" class="alert alert-success col-12">Thanks for filling out the form!</div>
                         <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">
@@ -111,23 +112,24 @@
                     <div class="dragArea row">
                         <div class="col-12">
                             <h1 class="mbr-section-title mb-4 mbr-fonts-style align-center display-2">
-                                <strong>Get Latest Updates!</strong>
+                                <strong>주식 상승/하락 여부를 예측해보세요!</strong>
                             </h1>
                         </div>
                         <div class="col-12">
-                            <p class="mbr-text mbr-fonts-style mb-5 align-center display-7">Start with creating a new website and picking up the theme. Then expand the blocks panel with the big red "plus" button in the lower right corner and start dragging the blocks you like.</p>
+                            <p class="mbr-text mbr-fonts-style mb-5 align-center display-7" style="margin:0">4가지의 개별 모델과 stacking 모델을 통해 주식 상승, 하락 여부를 예측할 수 있습니다.</p>
+                            <p class="mbr-text mbr-fonts-style mb-5 align-center display-7">*** 단, 투자 여부는 본인에게 달려있습니다. ***</p>
+
                         </div>
-                        <div class="col-md col-12 form-group mb-3" data-for="name">
-                            <input type="text" name="name" placeholder="Name" data-form-field="Name" class="form-control" id="name-form1-3">
-                        </div>
-                        <div class="col-md col-12 form-group mb-3" data-for="email">
-                            <input type="email" name="email" placeholder="Email" data-form-field="Email" class="form-control" id="email-form1-3">
-                        </div>
-                        <div class="mbr-section-btn col-12 col-md-auto">
-                            <button type="submit" class="btn btn-primary display-4">Subscribe</button>
+
+                        <div class="mbr-section-btn col-12 col-md-auto" style="margin: auto; width: 200px;">
+                            <form action="{% url 'result' %}" method="post" >
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary display-4">Go To Predict</button>
+                            </form>
+                            <h2>{{POST}}</h2>
                         </div>
                     </div>
-                </form>
+
             </div>
         </div>
     </div>
@@ -201,7 +203,6 @@
             </div>
         </div>
     </div>
-</section><section class="display-7" style="padding: 0;align-items: center;justify-content: center;flex-wrap: wrap;    align-content: center;display: flex;position: relative;height: 4rem;"><a href="https://mobiri.se/2774018" style="flex: 1 1;height: 4rem;position: absolute;width: 100%;z-index: 1;"><img alt="" style="height: 4rem;" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="></a><p style="margin: 0;text-align: center;" class="display-7">Built with Mobirise &#8204;</p><a style="z-index:1" href="https://mobirise.com/website-maker.html">Free Website Maker</a></section><script src="/static/main/assets/bootstrap/js/bootstrap.bundle.min.js"></script>  <script src="/static/main/assets/parallax/jarallax.js"></script>  <script src="/static/main/assets/smoothscroll/smooth-scroll.js"></script>  <script src="/static/main/assets/ytplayer/index.js"></script>  <script src="/static/main/assets/dropdown/js/navbar-dropdown.js"></script>  <script src="/static/main/assets/theme/js/script.js"></script>  <script src="/static/main/assets/formoid/formoid.min.js"></script>
 
 
 </body>

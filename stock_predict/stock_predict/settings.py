@@ -11,7 +11,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
-
+from . import kobert_load
+from . import lstm_news_load
+from . import cnn_cat_load
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -120,6 +122,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MODEL_URL = '/model/'
+MODEL_ROOT = os.path.join(BASE_DIR, 'model')
+MODEL_ROOT_URL = '.'
+
+MODEL_KOBERT = kobert_load.create_kobert()
+MY_TOKENIZER = kobert_load.load_bert_tokenizer()
+LSTM_MODEL = lstm_news_load.lstm_load()
+CNN_MODEL, CAT_MODEL = cnn_cat_load.cnn_cat_load()
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 

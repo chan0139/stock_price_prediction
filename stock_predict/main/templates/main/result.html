@@ -1,0 +1,130 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html  >
+<head>
+  <!-- Site made with Mobirise Website Builder v5.6.3, https://mobirise.com -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Mobirise v5.6.3, mobirise.com">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <link rel="shortcut icon" href="/static/main/assets/images/logo.png" type="image/x-icon">
+  <meta name="description" content="">
+
+
+  <title>Home</title>
+  <link rel="stylesheet" href="/static/main/assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/main/assets/bootstrap/css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="/static/main/assets/bootstrap/css/bootstrap-reboot.min.css">
+  <link rel="stylesheet" href="/static/main/assets/parallax/jarallax.css">
+  <link rel="stylesheet" href="/static/main/assets/dropdown/css/style.css">
+  <link rel="stylesheet" href="/static/main/assets/socicon/css/styles.css">
+  <link rel="stylesheet" href="/static/main/assets/theme/css/style.css">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,400;0,700;1,400;1,700&display=swap&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,400;0,700;1,400;1,700&display=swap&display=swap"></noscript>
+  <link rel="preload" as="style" href="/static/main/assets/mobirise/css/mbr-additional.css"><link rel="stylesheet" href="/static/main/assets/mobirise/css/mbr-additional.css" type="text/css">
+
+
+
+
+</head>
+
+
+
+<section data-bs-version="5.1" class="menu menu1 cid-t6OTSoFY7H" once="menu" id="menu1-4">
+
+
+  <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
+      <div class="container">
+          <div class="navbar-brand">
+
+              <span class="navbar-caption-wrap"><a class="navbar-caption text-black display-7"  href="http://127.0.0.1:8000/" style="margin-bottom:1.5em">Ants together strong</a></span>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <div class="hamburger">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+              </div>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true">
+                  <li class="nav-item"><a class="nav-link link text-black display-4" href="https://mobiri.se">
+                          About us</a></li>
+                  <li class="nav-item"><a class="nav-link link text-black display-4" href="https://mobiri.se">
+                          Services</a></li>
+                  <li class="nav-item"><a class="nav-link link text-black display-4" href="https://mobiri.se">Contacts</a>
+                  </li>
+              </ul>
+
+
+          </div>
+      </div>
+  </nav>
+</section>
+
+
+
+<h2 style="text-align: center;"></h2>
+<h2 style="text-align: center; margin-top:3em">{{time}}</h2>
+
+
+<form action="{% url 'result' %}" method="post">
+  {% csrf_token %}
+  <p style="text-align: center;">Please select your preferred model</p>
+  <div style="margin: auto; width: 295px; margin-bottom:1em;">
+    <input type="radio" id="modelChoice1"
+     name="contact" value="model1">
+    <label for="contactChoice1">model1</label>
+
+    <input type="radio" id="modelChoice2"
+     name="contact" value="model2">
+    <label for="contactChoice2">model2</label>
+
+    <input type="radio" id="modelChoice3"
+     name="contact" value="model3">
+    <label for="contactChoice3">model3</label>
+
+    <input type="radio" id="modelChoice4"
+     name="contact" value="model4">
+    <label for="contactChoice4">model4</label>
+  </div>
+  <div style="margin: auto; width: 100px;">
+    <button type="submit" class='btn'>select model</button>
+  </div>
+</form >
+{% if result == "모델을 골라주세요!" %}
+  <p style="text-align: center;">{{result}}</p>
+{% elif result >= 70 %}
+	 <p style="margin: 0; font-size:100px; text-align: center;" >&#127774;</p>
+   <h2 style="text-align: center;">{{result}}, 상승 예상됩니다.</h2>
+{% elif result >= 50 and result < 70 %}
+ 	 <p style="margin: 0; font-size:100px; text-align: center;" >&#127780;</p>
+   <h2 style="text-align: center;">{{result}}, 상승 예상됩니다.</h2>
+{% elif result < 50 and result >= 30 %}
+   <p style="margin: 0; font-size:100px">&#x2601;</p>
+   <h2 style="text-align: center;">{{result}}, 하락 예상됩니다.</h2>
+{% else %}
+   <p style="margin: 0; font-size:100px; text-align: center;" >&#127783;</p>
+   <h2 style="text-align: center;">{{result}}, 하락 예상됩니다.</h2>
+{% endif %}
+
+
+<form action="{% url 'result' %}" method="post">
+  {% csrf_token %}
+  <p style="text-align: center;">( 국내 / 해외 )</p>
+  <div style="margin: auto; width: 105px; margin-bottom:1em;">
+    <input type="radio" id="countryChoice1"
+     name="country" value="country1">
+    <label for="contactChoice1">국내</label>
+
+    <input type="radio" id="countryChoice2"
+     name="country" value="해외(미국)">
+    <label for="contactChoice2">해외</label>
+
+  </div>
+  <div style="margin: auto; width: 87px;">
+    <button type="submit" class="btn">종목 선택</button>
+  </div>
+</form>
