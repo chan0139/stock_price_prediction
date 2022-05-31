@@ -70,7 +70,7 @@ def result(request):
     selected_model = request.POST.get('contact', False)
     if selected_model == 'model1':
         result = predict()
-        result = 75
+
         answer = plus_or_minus(result)
 
     if selected_model == 'model2':
@@ -90,7 +90,7 @@ def result(request):
         day_input = get_last_day()
         result = lstm_today_predict(day_input)[0]
         result = round(result[0]*100,1)
-        result = 40
+
         answer = plus_or_minus(result)
 
 
