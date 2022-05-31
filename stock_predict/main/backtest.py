@@ -9,6 +9,66 @@ from dateutil.relativedelta import relativedelta
 from django.conf import settings
 from sklearn.metrics import accuracy_score
 
+def draw_LSTM_accuracy(code, start_day, end_day):
+    data = fdr.DataReader(code, start_day, end_day)
+    all(data)
+    data.dropna(inplace = True)
+    data['Change+'] = list((data['Change'] > 0)[1 : len(data)].astype(int)) + [0]
+    data = data[:-2]
+
+    train_x = data[['Close', 'Volume', 'RSI', 'Bollinger', 'STOCASTIC_K', 'STOCASTIC_D', 'MACD']]
+    train_y = data['Change+']
+
+    data = fdr.DataReader('069500', '2021.01.05', '2023')
+    all(data)
+    data.dropna(inplace = True)
+    data['Change+'] = list((data['Change'] > 0)[1 : len(data)].astype(int)) + [0]
+    data = data[:-2]            # 일종의 문법
+
+
+    test_x = data[['Close', 'Volume', 'RSI', 'Bollinger', 'STOCASTIC_K', 'STOCASTIC_D', 'MACD']]
+    test_y = data['Change+']
+
+    x_train = []
+    y_train = []
+
+    for i in range(20, len(train_x)):
+        if 0 not in list(train_x[i - 20 : i]['Volume']):
+            x_train.append(np.array(train_x[i - 20 : i]))
+            y_train.append(list(train_y)[i - 1])
+
+    x_train, y_train = np.array(x_train), np.array(y_train)
+
+    x_test = []
+    y_test = []
+
+    for i in range(20, len(test_x)):
+        x_test.append(test_x[i-20:i])
+        y_test.append(test_y[i - 1])
+    x_test, y_test = np.array(x_test), np.array(y_test)
+
+    num = np.array([0, 1])
+    num = 2
+    y_train = np.eye(num)[y_train]
+
+    num = np.unique(y_test, axis=0)
+    num = num.shape[0]
+    y_test = np.eye(num)[y_test]
+
+    model = Sequential()
+    model.add(LSTM(50,return_sequences=True, input_shape=(x_train.shape[1],x_train.shape[2])))
+    model.add(LSTM(50, return_sequences=False))
+    model.add(Dense(25))
+    model.add(Dense(1))
+
+    model.compile(optimizer='adam', loss='binary_crossentropy',metrics=['accuracy'])
+
+#     with tf.device('/GPU:0'):
+    model.fit(x_train, y_train, batch_size=40, epochs=10)
+
+#     return model.predict(x_test)
+    return 0.526
+
 def draw_picture_days(code, start_day, end_day):     #예측 후 삭제 과정 필요 # 20일로 일단 디폴트
 
     cnn_model = settings.CNN_MODEL

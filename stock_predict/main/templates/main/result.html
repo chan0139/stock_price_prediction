@@ -70,7 +70,7 @@
 
 <form action="{% url 'result' %}" method="post">
   {% csrf_token %}
-  <h2 style="text-align: center;">-> Please select your preferred model</h2>
+  <h2 style="text-align: center;">Please select your preferred model</h2>
   <div style="margin: auto; width: 300px; margin-bottom:2em; margin-top:2em;">
     <input type="radio" id="modelChoice1"
      name="contact" value="model1">
@@ -96,40 +96,38 @@
   <p style="text-align: center;">{{result}}</p>
 {% elif result >= 70 %}
 	 <p style="margin: 0; font-size:100px; text-align: center;" >&#127774;</p>
-   <h2 style="text-align: center;">{{result}}, 상승 예상됩니다.</h2>
+   <h2 style="text-align: center;">{{result}}% 상승 예상됩니다. </h2>
 {% elif result >= 50 and result < 70 %}
  	 <p style="margin: 0; font-size:100px; text-align: center;" >&#127780;</p>
-   <h2 style="text-align: center;">{{result}}, 상승 예상됩니다.</h2>
+   <h2 style="text-align: center;">{{result}}% 상승 예상됩니다. </h2>
 {% elif result < 50 and result >= 30 %}
-   <p style="margin: 0; font-size:100px">&#x2601;</p>
-   <h2 style="text-align: center;">{{result}}, 하락 예상됩니다.</h2>
+   <p style="margin: 0; font-size:100px; text-align: center;">&#x2601;</p>
+   <h2 style="text-align: center;">{{answer}}% 하락 예상됩니다.</h2>
 {% else %}
    <p style="margin: 0; font-size:100px; text-align: center;" >&#127783;</p>
-   <h2 style="text-align: center;">{{result}}, 하락 예상됩니다.</h2>
+   <h2 style="text-align: center;">{{answer}}% 하락 예상됩니다.</h2>
 {% endif %}
 
 
+
+
+<h2 style="text-align: center; margin-top:1em;"> Model Accuracy Test </h2>
+
+<div style="margin: auto; width: 155px;">
+  <input type="radio" id="countryChoice1"
+   name="country" value="country1">
+  <label for="contactChoice1">국내</label>
+
+  <input style=" margin-left:3em; " type="radio" id="countryChoice2"
+   name="country" value="해외(미국)">
+  <label for="contactChoice2">해외</label>
+
+</div>
+
 <form action="{% url 'result' %}" method="post">
   {% csrf_token %}
-  <p style="text-align: center; margin-top:1em;">( 국내 / 해외 )</p>
-  <div style="margin: auto; width: 105px; margin-bottom:2.5em;">
-    <input type="radio" id="countryChoice1"
-     name="country" value="country1">
-    <label for="contactChoice1">국내</label>
 
-    <input type="radio" id="countryChoice2"
-     name="country" value="해외(미국)">
-    <label for="contactChoice2">해외</label>
 
-  </div>
-  <div style="margin: auto; width: 85px;">
-    <button type="submit" class="btn">종목 선택</button>
-  </div>
-</form>
-
-<h2 style="text-align: center; margin-top:1em;"> Voting model test </h2>
-<form action="{% url 'result' %}" method="post">
-  {% csrf_token %}
       <p style=" float:left; margin-left:50em;"><input name="start" type="date" value="2022-05-20"></p>
       <p style=" float:right; margin-right:50em;"><input name="end" type="date" value="2022-05-31"></p>
 
@@ -138,4 +136,76 @@
       </div>
 </form>
 
-<h2 style="text-align: center;">{{stack}}</h2>
+<p style="text-align: center; margin-top:2em">CNN MODEL : {{pole_chart}}</p>
+<p style="text-align: center; margin-top:2em">CHART MODEL : {{chart}}</p>
+<p style="text-align: center; margin-top:2em">LSTM MODEL : {{lstm}}</p>
+<p style="text-align: center; margin-top:2em">STACKING MODEL : {{stack}}</p>
+
+<section data-bs-version="5.1" class="footer3 cid-t6OTpqwI5r" once="footers" id="footer3-2">
+
+
+
+
+
+    <div class="container">
+        <div class="media-container-row align-center mbr-white">
+            <div class="row row-links">
+                <ul class="foot-menu">
+
+
+
+
+
+                <li class="foot-menu-item mbr-fonts-style display-7">
+                        <a class="text-white" href="#" target="_blank">About us</a>
+                    </li><li class="foot-menu-item mbr-fonts-style display-7">
+                        <a class="text-white" href="#" target="_blank">Services</a>
+                    </li><li class="foot-menu-item mbr-fonts-style display-7">
+                        <a class="text-white" href="#" target="_blank">Contact Us</a>
+                    </li><li class="foot-menu-item mbr-fonts-style display-7">
+                        <a class="text-white" href="#" target="_blank">Careers</a>
+                    </li><li class="foot-menu-item mbr-fonts-style display-7">
+                        <a class="text-white" href="#" target="_blank">Work</a>
+                    </li></ul>
+            </div>
+            <div class="row social-row">
+                <div class="social-list align-right pb-2">
+
+
+
+
+
+
+                <div class="soc-item">
+                        <a href="https://twitter.com/mobirise" target="_blank">
+                            <span class="socicon-twitter socicon mbr-iconfont mbr-iconfont-social"></span>
+                        </a>
+                    </div><div class="soc-item">
+                        <a href="https://www.facebook.com/pages/Mobirise/1616226671953247" target="_blank">
+                            <span class="socicon-facebook socicon mbr-iconfont mbr-iconfont-social"></span>
+                        </a>
+                    </div><div class="soc-item">
+                        <a href="https://www.youtube.com/c/mobirise" target="_blank">
+                            <span class="socicon-youtube socicon mbr-iconfont mbr-iconfont-social"></span>
+                        </a>
+                    </div><div class="soc-item">
+                        <a href="https://instagram.com/mobirise" target="_blank">
+                            <span class="socicon-instagram socicon mbr-iconfont mbr-iconfont-social"></span>
+                        </a>
+                    </div><div class="soc-item">
+                        <a href="https://plus.google.com/u/0/+Mobirise" target="_blank">
+                            <span class="socicon-googleplus socicon mbr-iconfont mbr-iconfont-social"></span>
+                        </a>
+                    </div><div class="soc-item">
+                        <a href="https://www.behance.net/Mobirise" target="_blank">
+                            <span class="socicon-behance socicon mbr-iconfont mbr-iconfont-social"></span>
+                        </a>
+                    </div></div>
+            </div>
+            <div class="row row-copirayt">
+                <p class="mbr-text mb-0 mbr-fonts-style mbr-white align-center display-7">
+                    © Copyright 2025 Mobirise. All Rights Reserved.
+                </p>
+            </div>
+        </div>
+    </div>

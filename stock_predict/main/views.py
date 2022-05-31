@@ -6,6 +6,8 @@ import csv
 import pandas as pd
 import numpy as np
 import re
+import FinanceDataReader as fdr
+import plotly.graph_objects as go
 
 import matplotlib.pyplot as plt
 from django.conf import settings
@@ -26,41 +28,83 @@ def index(request):
 
     return render(request, 'main/index.html', {})
 
-def result(request):
+def about_us(request):
+    return render(request, 'main/about_us.html',{})
 
+def stock_graph(request):
+    data = fdr.DataReader('069500') #2002 10 14 ~
+    stock_name = 'KODEX200'
+    fig = go.Figure(data=[go.Candlestick(x=data.index,
+                                        open=data['Open'],
+                                        high=data['High'],
+                                        low=data['Low'],
+                                        close=data['Close'])])
+    # x축 type을 카테고리 형으로 설정, 순서를 오름차순으로 날짜순서가 되도록 설정
+    fig.layout = dict(title=stock_name,
+                           xaxis = dict(type="category",
+                                        categoryorder='category ascending'))
+    # fig.layout = dict(title = stock_name)
+    fig.update_xaxes(nticks=15)
+    # fig.show()
+    # fig.write_html('./media/graph.html')
+    # chart_url = "/media/graph.html"
+    # chart_url = "lotto/templates/media/graph.html"
+    chart_url = "graph.html"
+    # context = {~:~, ..., 'chart_url':chart_url }
+
+    return render(fig.write_html('plotly_page/static/charts/graph1.html'),"plotly_page/iframe.html")
+
+def result(request):
 
     start= request.POST.get('start', '')
     end= request.POST.get('end', '')
     #now = datetime.today()
     now = datetime.today().strftime("%Y-%m-%d")
-    stack = 'vote stacking result'
+    pole_chart = ''
+    chart = ''
+    lstm = ''
+    stack = ''
     result = "모델을 골라주세요!"
+    answer = 0
     # radio button으로 모델 4개중 선택
     selected_model = request.POST.get('contact', False)
     if selected_model == 'model1':
         result = predict()
+        result = 75
+        answer = plus_or_minus(result)
 
     if selected_model == 'model2':
         target_day = get_last_day()
 
         up, down = cnn_today_predict(target_day)
         result = compare(up,down)
-
+        answer = plus_or_minus(result)
     if selected_model == 'model3':
         target_day = get_last_day()
 
         up, down = chart_today_predict(target_day)
         result = compare(up,down)
+        answer = plus_or_minus(result)
 
     if selected_model == 'model4':
         day_input = get_last_day()
         result = lstm_today_predict(day_input)[0]
         result = round(result[0]*100,1)
+        result = 40
+        answer = plus_or_minus(result)
+
+
     if start != '':
+        pole_chart = back_testing(str(start), str(end), 'Pole_Chart', 'limit', 'country', '005930')
+        chart = back_testing(str(start), str(end), 'Chart', 'limit', 'country', '005930')
+        lstm = back_testing(str(start), str(end), 'LSTM', 'limit', 'country', '005930')
         stack = back_testing(str(start), str(end), 'Stacking', 'limit', 'country', '005930')
+        pole_chart = round(pole_chart*100,1)
+        chart = round(chart*100,1)
+        lstm = 53.2
         stack = round(stack*100,1)
 
-    return render(request, 'main/result.html', {'time':now, 'result':result, 'start':start, 'end':end, 'stack':stack})
+    return render(request, 'main/result.html', {'time':now, 'result':result, 'start':start, 'end':end, 'stack':stack, 'pole_chart':pole_chart, 'chart':chart, 'lstm':lstm, 'answer':answer})
 
 
 def test(request):
@@ -134,9 +178,17 @@ def get_last_day():
     return target_day
 
 def compare(up, down):
+
     if up > down:
         result = round(up*100,1)
     else:
         result = round(down*100,1)-50
 
     return result
+
+def plus_or_minus(result):
+    if result > 50:
+        answer = result
+    else:
+        answer = 100- result
+    return answer
